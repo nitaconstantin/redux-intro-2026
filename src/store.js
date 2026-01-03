@@ -24,7 +24,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loan: 0,
-        loanPurpoze: "",
+        loanPurpose: "",
         balance: state.balance - state.loan,
       };
     default:
@@ -32,28 +32,66 @@ function reducer(state = initialState, action) {
   }
 }
 const store = createStore(reducer);
-store.dispatch({
-  type: "account/deposit",
-  payload: 500,
-});
+// store.dispatch({
+//   type: "account/deposit",
+//   payload: 500,
+// });
 
-// console.log("Hey Redux");
+// // console.log("Hey Redux");
+// console.log(store.getState());
+// store.dispatch({
+//   type: "account/withdraw",
+//   payload: 200,
+// });
+
+// // console.log("Hey Redux");
+// console.log(store.getState());
+// store.dispatch({
+//   type: "account/requestLoan",
+//   payload: { amount: 1000, purpose: "Buy a car" },
+// });
+
+// console.log(store.getState());
+
+// store.dispatch({
+//   type: "account/payLoan",
+// });
+// console.log(store.getState());
+
+function deposit(amount) {
+  return {
+    type: "account/deposit",
+    payload: amount,
+  };
+}
+
+function withdraw(amount) {
+  return {
+    type: "account/withdraw",
+    payload: amount,
+  };
+}
+
+function requestLoan(amount, purpose) {
+  return {
+    type: "account/requestLoan",
+    payload: {
+      amount,
+      purpose,
+    },
+  };
+}
+function payLoan() {
+  return {
+    type: "account/payLoan",
+  };
+}
+
+store.dispatch(deposit(500));
 console.log(store.getState());
-store.dispatch({
-  type: "account/withdraw",
-  payload: 200,
-});
-
-// console.log("Hey Redux");
+store.dispatch(withdraw(200));
 console.log(store.getState());
-store.dispatch({
-  type: "account/requestLoan",
-  payload: { amount: 1000, purpose: "Buy a car" },
-});
-
+store.dispatch(requestLoan(1000, "Buy a cheap car"));
 console.log(store.getState());
-
-store.dispatch({
-  type: "account/payLoan",
-});
+store.dispatch(payLoan());
 console.log(store.getState());
